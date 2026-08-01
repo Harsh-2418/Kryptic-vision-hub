@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Kryptic Vision Hub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-5">
+                <div class="card auth-card border-0 shadow-lg rounded-4 overflow-hidden">
+                    <div class="card-header bg-secondary text-white text-center py-4 border-0">
+                        <div class="auth-icon-circle bg-white text-secondary mx-auto mb-2">
+                            <i class="bi bi-person-plus-fill fs-3"></i>
+                        </div>
+                        <h4 class="fw-bold mb-0">Create Account</h4>
+                        <p class="small text-white-50 mb-0">Join Kryptic Vision Hub Security Portal</p>
+                    </div>
+
+                    <div class="card-body p-4 p-md-5 bg-white">
+                        <form action="{{ url_for('auth.register') }}" method="POST" class="auth-form" id="registerForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label text-secondary fw-semibold">Full Name</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-person"></i></span>
+                                    <input type="text" class="form-control border-start-0 ps-0" id="name" name="name" value="{{ name or '' }}" placeholder="John Doe" required autocomplete="name">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label text-secondary fw-semibold">Email Address</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-envelope"></i></span>
+                                    <input type="email" class="form-control border-start-0 ps-0" id="email" name="email" value="{{ email or '' }}" placeholder="name@example.com" required autocomplete="email">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label text-secondary fw-semibold">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-lock"></i></span>
+                                    <input type="password" class="form-control border-start-0 ps-0" id="password" name="password" placeholder="At least 6 characters" required autocomplete="new-password">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="confirm_password" class="form-label text-secondary fw-semibold">Confirm Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-shield-check"></i></span>
+                                    <input type="password" class="form-control border-start-0 ps-0" id="confirm_password" name="confirm_password" placeholder="Repeat your password" required autocomplete="new-password">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-secondary w-100 py-2.5 rounded-pill shadow-sm fw-semibold mb-3">
+                                Create Account
+                            </button>
+                        </form>
+
+                        <div class="text-center mt-3 pt-3 border-top">
+                            <p class="text-muted small mb-0">
+                                Already have an account? 
+                                <a href="{{ url_for('auth.login') }}" class="text-primary fw-bold text-decoration-none">Sign in here</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

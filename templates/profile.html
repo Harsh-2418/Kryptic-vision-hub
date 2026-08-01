@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}User Profile - Kryptic Vision Hub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="py-5 bg-light">
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Profile Overview Card Left -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 text-center p-4 bg-white">
+                    <div class="profile-avatar-wrapper mx-auto mb-3 text-primary bg-primary-subtle rounded-circle d-flex align-items-center justify-content-center">
+                        {% if user.profile_pic %}
+                            <span class="fs-1">{{ user.profile_pic }}</span>
+                        {% else %}
+                            <i class="bi bi-person-fill display-4"></i>
+                        {% endif %}
+                    </div>
+                    <h4 class="fw-bold text-secondary mb-1">{{ user.name }}</h4>
+                    <p class="text-muted small mb-3">{{ user.email }}</p>
+
+                    {% if user.is_admin %}
+                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-1.5 rounded-pill mb-3">
+                        <i class="bi bi-shield-lock me-1"></i> System Administrator
+                    </span>
+                    {% else %}
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-1.5 rounded-pill mb-3">
+                        <i class="bi bi-person-check me-1"></i> Security Researcher
+                    </span>
+                    {% endif %}
+
+                    <ul class="list-group list-group-flush text-start border-top pt-3 small">
+                        <li class="list-group-item bg-transparent d-flex justify-content-between px-0">
+                            <span class="text-muted">Registered On:</span>
+                            <strong class="text-secondary">{{ user.created_at }}</strong>
+                        </li>
+                        <li class="list-group-item bg-transparent d-flex justify-content-between px-0">
+                            <span class="text-muted">Last Login:</span>
+                            <strong class="text-secondary">{{ user.last_login or 'Just now' }}</strong>
+                        </li>
+                        <li class="list-group-item bg-transparent d-flex justify-content-between px-0">
+                            <span class="text-muted">Total Phishing Scans:</span>
+                            <strong class="text-primary">{{ total_scans }}</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Profile Settings Form Right -->
+            <div class="col-lg-8">
+                <!-- Update Name & Avatar Card -->
+                <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white mb-4">
+                    <h5 class="fw-bold text-secondary mb-3">
+                        <i class="bi bi-person-gear text-primary me-2"></i>Account Details
+                    </h5>
+
+                    <form action="{{ url_for('profile.update_profile') }}" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label text-secondary fw-semibold">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label text-secondary fw-semibold">Email Address (Read-Only)</label>
+                            <input type="email" class="form-control bg-light" id="email" value="{{ user.email }}" readonly>
+                        </div>
+                        <div class="mb-4">
+                            <label for="avatar" class="form-label text-secondary fw-semibold">Choose Avatar Icon Emoji</label>
+                            <select class="form-select" id="avatar" name="avatar">
+                                <option value="🛡️" {% if user.profile_pic == '🛡️' %}selected{% endif %}>🛡️ Security Shield</option>
+                                <option value="👨‍💻" {% if user.profile_pic == '👨‍💻' %}selected{% endif %}>👨‍💻 Developer / Analyst</option>
+                                <option value="🔐" {% if user.profile_pic == '🔐' %}selected{% endif %}>🔐 Security Lock</option>
+                                <option value="🚀" {% if user.profile_pic == '🚀' %}selected{% endif %}>🚀 Cyber Explorer</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 shadow-sm fw-semibold">
+                            Save Account Details
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Change Password Card -->
+                <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+                    <h5 class="fw-bold text-secondary mb-3">
+                        <i class="bi bi-key text-warning me-2"></i>Change Security Password
+                    </h5>
+
+                    <form action="{{ url_for('profile.change_password') }}" method="POST">
+                        <div class="mb-3">
+                            <label for="current_password" class="form-label text-secondary fw-semibold">Current Password</label>
+                            <input type="password" class="form-control" id="current_password" name="current_password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new_password" class="form-label text-secondary fw-semibold">New Password</label>
+                            <input type="password" class="form-control" id="new_password" name="new_password" placeholder="At least 6 characters" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="confirm_password" class="form-label text-secondary fw-semibold">Confirm New Password</label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-secondary rounded-pill px-4 shadow-sm fw-semibold">
+                            Update Password
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock %}

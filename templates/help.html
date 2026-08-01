@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Help Center & Cyber Security Base - Kryptic Vision Hub{% endblock %}
+
+{% block content %}
+<div class="py-5 bg-light">
+    <div class="container">
+        <!-- Header -->
+        <div class="text-center max-w-2xl mx-auto mb-5">
+            <span class="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-semibold mb-2">
+                <i class="bi bi-patch-question me-1"></i> Knowledge Base & Guidelines
+            </span>
+            <h2 class="fw-bold text-secondary">Help Center & Security Education</h2>
+            <p class="text-muted">Learn essential concepts of web security, rule engines, phishing indicators, and defensive practices.</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Left FAQ Accordion -->
+            <div class="col-lg-7">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                    <h4 class="fw-bold text-secondary mb-4">
+                        <i class="bi bi-question-circle text-primary me-2"></i>Frequently Asked Questions
+                    </h4>
+
+                    <div class="accordion accordion-flush" id="faqAccordion">
+                        <div class="accordion-item border-bottom py-2">
+                            <h2 class="accordion-header" id="faqOne">
+                                <button class="accordion-button collapsed fw-semibold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                    How does the Rule-Based Phishing Engine evaluate URLs?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted small">
+                                    Our engine checks 12+ deterministic URL characteristics including HTTP vs HTTPS, raw IP hostnames, symbol counts (`@`, `//`, `-`), domain length, suspicious TLDs (`.xyz`, `.top`), SSL certificate validity, and redirection history to calculate an aggregate threat percentage (0-100%).
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-bottom py-2">
+                            <h2 class="accordion-header" id="faqTwo">
+                                <button class="accordion-button collapsed fw-semibold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                    What is the difference between SQL & XSS Static Code Analyzers?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted small">
+                                    The SQL Analyzer inspects backend database query construction (Python, PHP, Node.js) for unparameterized string concatenation. The XSS Analyzer inspects frontend templates and JavaScript DOM methods (`innerHTML`, `document.write`) for unescaped HTML output.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-bottom py-2">
+                            <h2 class="accordion-header" id="faqThree">
+                                <button class="accordion-button collapsed fw-semibold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                    What is an Evil Twin Access Point attack?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted small">
+                                    An Evil Twin is a rogue wireless access point configured to broadcast the exact SSID of a trusted network (e.g. airport or university WiFi) to capture victim credentials. Our Evil Twin Simulator checks for BSSID (MAC Address) mismatches and encryption protocol shifts.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Guidelines Checklist -->
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                    <h5 class="fw-bold text-secondary mb-3">
+                        <i class="bi bi-shield-check text-success me-2"></i>Safe Browsing Guidelines
+                    </h5>
+                    <ul class="list-unstyled d-flex flex-column gap-3 mb-0 small">
+                        <li class="d-flex align-items-start gap-2">
+                            <i class="bi bi-check-circle-fill text-success fs-5 flex-shrink-0"></i>
+                            <div>
+                                <strong class="d-block text-secondary">Verify Domain Spelling</strong>
+                                <span class="text-muted">Always double-check address bar spellings for homograph tricks (e.g. <code>paypaI.com</code> vs <code>paypal.com</code>).</span>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-start gap-2">
+                            <i class="bi bi-check-circle-fill text-success fs-5 flex-shrink-0"></i>
+                            <div>
+                                <strong class="d-block text-secondary">Ensure Valid HTTPS & SSL</strong>
+                                <span class="text-muted">Never transmit passwords or financial data over plain HTTP connections.</span>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-start gap-2">
+                            <i class="bi bi-check-circle-fill text-success fs-5 flex-shrink-0"></i>
+                            <div>
+                                <strong class="d-block text-secondary">Use Multi-Factor Authentication (MFA)</strong>
+                                <span class="text-muted">Enable 2FA across all critical personal and corporate accounts.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

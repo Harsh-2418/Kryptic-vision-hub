@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Scan Result - Kryptic Vision Hub{% endblock %}
+
+{% block content %}
+<div class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-xl-8">
+                <!-- Result Overview Card -->
+                <div class="card border-0 shadow-lg rounded-4 overflow-hidden mb-4 bg-white">
+                    <div class="card-header text-white p-4 p-md-5 text-center position-relative" style="background-color: {{ badge_color }};">
+                        <!-- Icon -->
+                        <div class="result-icon-wrapper bg-white text-dark rounded-circle mx-auto mb-3 shadow-sm d-flex align-items-center justify-content-center">
+                            {% if scan.status == 'Safe' %}
+                                <i class="bi bi-shield-check text-success display-4"></i>
+                            {% elif scan.status == 'Suspicious' %}
+                                <i class="bi bi-shield-exclamation text-warning display-4"></i>
+                            {% else %}
+                                <i class="bi bi-shield-x text-danger display-4"></i>
+                            {% endif %}
+                        </div>
+
+                        <span class="badge bg-white text-dark text-uppercase tracking-wider fw-bold px-3 py-1.5 rounded-pill mb-2">
+                            Status: {{ scan.status }}
+                        </span>
+                        
+                        <h1 class="display-3 fw-bold mb-1">{{ scan.risk_score }}%</h1>
+                        <p class="mb-0 text-white-50 fw-semibold">Calculated Threat Risk Score</p>
+                    </div>
+
+                    <div class="card-body p-4 p-md-5">
+                        <!-- Target URL details -->
+                        <div class="bg-light p-3 rounded-3 border mb-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+                            <div>
+                                <span class="small text-muted d-block text-uppercase fw-bold">Analyzed Target URL</span>
+                                <code class="fs-6 text-secondary font-monospace text-break">{{ scan.url }}</code>
+                            </div>
+                            <div class="text-md-end flex-shrink-0">
+                                <span class="small text-muted d-block">Scan Date</span>
+                                <span class="small fw-semibold text-secondary">{{ scan.created_at }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Recommendations Card -->
+                        <div class="alert alert-{{ status_class }} border-0 rounded-4 p-4 mb-4">
+                            <h5 class="fw-bold d-flex align-items-center gap-2 mb-2">
+                                <i class="bi bi-lightbulb-fill"></i> Security Recommendation
+                            </h5>
+                            <p class="mb-0 fs-6">{{ scan.recommendation }}</p>
+                        </div>
+
+                        <!-- Identified Security Reasons -->
+                        <div class="mb-4">
+                            <h5 class="fw-bold text-secondary mb-3">
+                                <i class="bi bi-list-check me-2 text-primary"></i>Evaluated Indicators & Triggered Rules
+                            </h5>
+                            <ul class="list-group list-group-flush rounded-3 border">
+                                {% for reason in reasons %}
+                                <li class="list-group-item p-3 d-flex align-items-start gap-3">
+                                    {% if scan.status == 'Safe' and not scan.risk_score %}
+                                        <i class="bi bi-check-circle-fill text-success fs-5 flex-shrink-0"></i>
+                                    {% elif 'HTTPS' in reason or 'Legitimate' in reason or 'No suspicious' in reason %}
+                                        <i class="bi bi-check-circle-fill text-success fs-5 flex-shrink-0"></i>
+                                    {% else %}
+                                        <i class="bi bi-exclamation-triangle-fill text-{{ status_class }} fs-5 flex-shrink-0"></i>
+                                    {% endif %}
+                                    <div>
+                                        <span class="fw-semibold text-secondary d-block">{{ reason }}</span>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex flex-wrap gap-3 justify-content-between align-items-center pt-3 border-top">
+                            <a href="{{ url_for('scanner.scanner_page') }}" class="btn btn-outline-secondary rounded-pill px-4">
+                                <i class="bi bi-arrow-left me-1"></i> Scan Another URL
+                            </a>
+                            
+                            <div class="d-flex gap-2">
+                                <a href="{{ url_for('scanner.export_report', scan_id=scan.id) }}" class="btn btn-primary rounded-pill px-4 shadow-sm">
+                                    <i class="bi bi-download me-1"></i> Download JSON Report
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Rule-Based Cyber Security Toolkit{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section py-5 border-bottom">
+    <div class="container py-lg-4">
+        <div class="row align-items-center gy-4">
+            <div class="col-lg-7 text-center text-lg-start">
+                <span class="badge bg-primary-subtle text-primary fw-semibold px-3 py-2 rounded-pill mb-3">
+                    <i class="bi bi-shield-lock me-1"></i> SaaS Cyber Security Toolkit
+                </span>
+                <h1 class="display-4 fw-bold text-secondary tracking-tight mb-3">
+                    Kryptic Vision Hub
+                </h1>
+                <p class="lead text-muted mb-4 pe-lg-4">
+                    Protect against phishing threats, static code vulnerabilities, and wireless security anomalies with transparent rule-based threat evaluation.
+                </p>
+                <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                    <a href="{{ url_for('scanner.scanner_page') }}" class="btn btn-primary btn-lg px-4 rounded-pill shadow-sm">
+                        <i class="bi bi-search me-2"></i>Start Scan
+                    </a>
+                    <a href="#about" class="btn btn-outline-secondary btn-lg px-4 rounded-pill">
+                        <i class="bi bi-info-circle me-2"></i>Learn More
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="hero-card border-0 p-4 rounded-4 shadow-lg text-center bg-white">
+                    <div class="hero-icon-wrapper bg-primary-subtle text-primary mx-auto mb-3">
+                        <i class="bi bi-shield-check display-4"></i>
+                    </div>
+                    <h5 class="fw-bold text-secondary mb-2">Instant Threat Protection</h5>
+                    <p class="text-muted small mb-4">Paste any domain or URL to evaluate SSL, character syntax, suspicious TLDs, and keyword anomalies.</p>
+                    <div class="p-3 rounded-3 border text-start bg-light">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="small text-muted">Sample Target:</span>
+                            <span class="badge bg-danger-subtle text-danger">High Risk (+75%)</span>
+                        </div>
+                        <code class="small text-secondary d-block text-truncate">http://bank-secure-login.xyz/verify</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Feature Cards Section -->
+<section class="py-5">
+    <div class="container py-lg-3">
+        <div class="text-center max-w-2xl mx-auto mb-5">
+            <h2 class="fw-bold text-secondary">Core Security Modules</h2>
+            <p class="text-muted">Built with clear, deterministic evaluation rules to deliver transparent risk metrics.</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Feature 1 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border rounded-4 shadow-sm feature-card">
+                    <div class="card-body p-4 text-center">
+                        <div class="feature-icon bg-primary-subtle text-primary mx-auto mb-3">
+                            <i class="bi bi-link-45deg fs-3"></i>
+                        </div>
+                        <h5 class="fw-bold text-secondary mb-2">Phishing Scanner</h5>
+                        <p class="text-muted small mb-0">Identifies deceptive domains designed to mimic legitimate financial, social, or corporate portals.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border rounded-4 shadow-sm feature-card">
+                    <div class="card-body p-4 text-center">
+                        <div class="feature-icon bg-warning-subtle text-warning mx-auto mb-3">
+                            <i class="bi bi-database-gear fs-3"></i>
+                        </div>
+                        <h5 class="fw-bold text-secondary mb-2">SQL Analyzer</h5>
+                        <p class="text-muted small mb-0">Static code analysis for dynamic SQL string concatenation flaws and raw queries.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border rounded-4 shadow-sm feature-card">
+                    <div class="card-body p-4 text-center">
+                        <div class="feature-icon bg-info-subtle text-info mx-auto mb-3">
+                            <i class="bi bi-code-slash fs-3"></i>
+                        </div>
+                        <h5 class="fw-bold text-secondary mb-2">XSS Analyzer</h5>
+                        <p class="text-muted small mb-0">Static template analysis for unescaped DOM assignments and raw script outputs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border rounded-4 shadow-sm feature-card">
+                    <div class="card-body p-4 text-center">
+                        <div class="feature-icon bg-danger-subtle text-danger mx-auto mb-3">
+                            <i class="bi bi-wifi fs-3"></i>
+                        </div>
+                        <h5 class="fw-bold text-secondary mb-2">WiFi Security</h5>
+                        <p class="text-muted small mb-0">Simulates wireless risk scoring and Evil Twin access point spoofing detection.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-5 border-top">
+    <div class="container py-lg-4">
+        <div class="row align-items-center gy-4">
+            <div class="col-lg-6">
+                <h2 class="fw-bold text-secondary mb-3">Understanding Phishing Attacks</h2>
+                <p class="text-muted mb-3">
+                    Phishing is a social engineering cyber attack where malicious actors create deceptive websites that closely resemble trusted platforms such as banks, email providers, or payment gateways.
+                </p>
+                <p class="text-muted mb-4">
+                    The goal of an attacker is to trick unsuspecting users into entering confidential credentials, passwords, credit card numbers, or personal identifying information.
+                </p>
+
+                <div class="d-flex flex-column gap-3">
+                    <div class="d-flex gap-3 align-items-start">
+                        <div class="badge bg-primary rounded-circle p-2 mt-1"><i class="bi bi-check-lg"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-1 text-secondary">Deceptive Domain Names</h6>
+                            <p class="small text-muted mb-0">Attackers substitute letters or add extra hyphens (e.g., <code>paypaI.com</code> with an uppercase 'I' or <code>login-bank-secure.xyz</code>).</p>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3 align-items-start">
+                        <div class="badge bg-primary rounded-circle p-2 mt-1"><i class="bi bi-check-lg"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-1 text-secondary">Unencrypted HTTP Connections</h6>
+                            <p class="small text-muted mb-0">Phishing sites often lack valid SSL/TLS certificates or utilize suspicious non-standard top-level domains.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3 align-items-start">
+                        <div class="badge bg-primary rounded-circle p-2 mt-1"><i class="bi bi-check-lg"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-1 text-secondary">Urgency & Phishing Keywords</h6>
+                            <p class="small text-muted mb-0">URLs frequently embed keywords like <code>verify</code>, <code>wallet</code>, <code>update</code>, or <code>signin</code> to trick victims into rapid action.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card border rounded-4 shadow-sm p-4 bg-white">
+                    <h5 class="fw-bold text-secondary mb-3"><i class="bi bi-sliders me-2 text-primary"></i>How Kryptic Vision Scores URLs</h5>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Security Indicator</th>
+                                    <th class="text-end">Risk Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i class="bi bi-exclamation-triangle text-danger me-2"></i>Raw IP Address</td>
+                                    <td class="text-end fw-bold text-danger">+30</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="bi bi-at text-danger me-2"></i>Contains '@' Symbol</td>
+                                    <td class="text-end fw-bold text-danger">+25</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="bi bi-lock text-warning me-2"></i>HTTP Scheme (No SSL)</td>
+                                    <td class="text-end fw-bold text-warning">+20</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="bi bi-key text-warning me-2"></i>Phishing Keywords</td>
+                                    <td class="text-end fw-bold text-warning">+20</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="bi bi-link-45deg text-secondary me-2"></i>URL Length > 75 Chars</td>
+                                    <td class="text-end fw-bold text-secondary">+15</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="bi bi-globe text-secondary me-2"></i>Suspicious TLDs (.xyz, .top)</td>
+                                    <td class="text-end fw-bold text-secondary">+10</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

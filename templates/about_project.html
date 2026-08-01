@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}About Project - Kryptic Vision Hub{% endblock %}
+
+{% block content %}
+<div class="py-5 bg-light">
+    <div class="container">
+        <!-- Header -->
+        <div class="text-center max-w-2xl mx-auto mb-5">
+            <span class="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-semibold mb-2">
+                <i class="bi bi-mortarboard me-1"></i> University 7th Semester Group Project
+            </span>
+            <h1 class="display-5 fw-bold text-secondary">Kryptic Vision Hub</h1>
+            <p class="lead text-muted">A Production-Grade, Rule-Based Cyber Security & Threat Analysis Toolkit.</p>
+        </div>
+
+        <!-- Project Objectives & Tech Stack Row -->
+        <div class="row g-4 mb-5">
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100">
+                    <h4 class="fw-bold text-secondary mb-3"><i class="bi bi-bullseye text-primary me-2"></i>Project Objectives</h4>
+                    <p class="text-muted">
+                        Kryptic Vision Hub was engineered to bridge the gap between theoretical cyber security education and practical defensive toolkit implementation. Unlike black-box machine learning engines, our architecture focuses on transparent, rule-based threat scoring that allows users and developers to understand exactly why a resource is classified as hazardous.
+                    </p>
+                    <ul class="text-muted small mb-0">
+                        <li class="mb-2">Implement deterministic phishing URL scoring using 12+ network & string rules.</li>
+                        <li class="mb-2">Provide static code analyzers for SQL Injection and Cross-Site Scripting (XSS).</li>
+                        <li class="mb-2">Simulate wireless security risks (Fake WiFi and Evil Twin attack vectors).</li>
+                        <li class="mb-0">Deliver automated PDF report generation (ReportLab) and real-time Chart.js analytics.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100">
+                    <h4 class="fw-bold text-secondary mb-3"><i class="bi bi-cpu text-success me-2"></i>Technology Stack</h4>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover align-middle mb-0">
+                            <tbody>
+                                <tr>
+                                    <th class="text-secondary" style="width: 140px;">Backend Framework</th>
+                                    <td class="text-muted">Python 3.10+ / Flask 3.0 (Modular Blueprints)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-secondary">Database</th>
+                                    <td class="text-muted">SQLite3 (Parameterized Queries & Foreign Keys)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-secondary">Frontend Architecture</th>
+                                    <td class="text-muted">HTML5, CSS3, Bootstrap 5.3, Vanilla ES6 JavaScript</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-secondary">Typography & Icons</th>
+                                    <td class="text-muted">Google Font <b>Inter</b>, Bootstrap Icons 1.11</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-secondary">Reporting & Charts</th>
+                                    <td class="text-muted">ReportLab 4.1 PDF Engine, Chart.js 4.x Visualizations</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Development Team Section -->
+        <div class="mb-4 text-center">
+            <h3 class="fw-bold text-secondary mb-1"><i class="bi bi-people text-primary me-2"></i>Project Development Team</h3>
+            <p class="text-muted small mb-0">University Group Project Team Members</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <!-- Member 1: IU2341220101 -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100 text-center feature-card">
+                    <div class="team-avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3 fw-bold fs-4 shadow-sm" style="width: 64px; height: 64px;">
+                        VG
+                    </div>
+                    <h5 class="fw-bold text-secondary mb-1">Vibhuti Garg</h5>
+                    <p class="text-muted small mb-0">Enrollment Number: <code class="fw-semibold">IU2341220101</code></p>
+                </div>
+            </div>
+
+            <!-- Member 2: IU2341220103 -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100 text-center feature-card">
+                    <div class="team-avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3 fw-bold fs-4 shadow-sm" style="width: 64px; height: 64px;">
+                        VJ
+                    </div>
+                    <h5 class="fw-bold text-secondary mb-1">Vishva Joshi</h5>
+                    <p class="text-muted small mb-0">Enrollment Number: <code class="fw-semibold">IU2341220103</code></p>
+                </div>
+            </div>
+
+            <!-- Member 3: IU2341220104 -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100 text-center feature-card">
+                    <div class="team-avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3 fw-bold fs-4 shadow-sm" style="width: 64px; height: 64px;">
+                        PS
+                    </div>
+                    <h5 class="fw-bold text-secondary mb-1">Priya Salvi</h5>
+                    <p class="text-muted small mb-0">Enrollment Number: <code class="fw-semibold">IU2341220104</code></p>
+                </div>
+            </div>
+
+            <!-- Member 4: IU2341220112 -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100 text-center feature-card">
+                    <div class="team-avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3 fw-bold fs-4 shadow-sm" style="width: 64px; height: 64px;">
+                        KK
+                    </div>
+                    <h5 class="fw-bold text-secondary mb-1">Krishna Koladara</h5>
+                    <p class="text-muted small mb-0">Enrollment Number: <code class="fw-semibold">IU2341220112</code></p>
+                </div>
+            </div>
+
+            <!-- Member 5: IU2441221242 -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100 text-center feature-card">
+                    <div class="team-avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3 fw-bold fs-4 shadow-sm" style="width: 64px; height: 64px;">
+                        HA
+                    </div>
+                    <h5 class="fw-bold text-secondary mb-1">Harsh Ahuja</h5>
+                    <p class="text-muted small mb-0">Enrollment Number: <code class="fw-semibold">IU2441221242</code></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

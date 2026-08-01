@@ -1,0 +1,15 @@
+{
+    "report_title": "Kryptic Vision Hub - Phishing Threat Analysis",
+    "scan_id": 2,
+    "target_url": "http://secure-login.example.invalid",
+    "risk_score": "85%",
+    "status": "Dangerous",
+    "reasons": [
+        "Uses HTTP protocol instead of secure HTTPS.",
+        "Contains sensitive keyword(s): login, secure.",
+        "Domain resolution anomaly or domain could not be resolved.",
+        "No SSL/TLS certificate (HTTP mode)."
+    ],
+    "recommendation": "Critical Risk! Avoid visiting this website. Highly probable phishing attempt designed to compromise credentials or security.",
+    "scan_timestamp": "2026-07-31 13:18:57"
+}

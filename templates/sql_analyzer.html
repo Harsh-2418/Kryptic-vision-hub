@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}SQL Analyzer - Kryptic Vision Hub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/analysis.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="py-5 bg-light min-vh-75">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <!-- Defensive Disclaimer Alert -->
+                <div class="alert alert-info border-0 shadow-sm rounded-4 p-3 mb-4 d-flex align-items-center gap-3">
+                    <i class="bi bi-shield-check fs-2 text-info flex-shrink-0"></i>
+                    <div>
+                        <strong class="d-block text-secondary">Defensive Educational Tool</strong>
+                        <span class="small text-muted">This module performs static pattern analysis on source code to detect insecure SQL string formatting. No code is executed and no database connections are established.</span>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5 bg-white">
+                    <div class="text-center mb-4">
+                        <div class="module-icon-circle bg-primary-subtle text-primary mx-auto mb-3">
+                            <i class="bi bi-database-gear fs-2"></i>
+                        </div>
+                        <h2 class="fw-bold text-secondary mb-2">SQL Injection Vulnerability Analyzer</h2>
+                        <p class="text-muted small">Paste backend database code (Python, PHP, Node.js, Java, SQL) to detect dynamic concatenation flaws.</p>
+                    </div>
+
+                    <form id="sqlForm" action="{{ url_for('sql.analyze_sql') }}" method="POST">
+                        <div class="mb-4">
+                            <label for="code_snippet" class="form-label text-secondary fw-semibold">Source Code / SQL Query Snippet</label>
+                            <textarea class="form-control font-monospace border rounded-3 p-3 text-secondary" 
+                                      id="code_snippet" 
+                                      name="code_snippet" 
+                                      rows="8" 
+                                      placeholder="# Example (Python/Flask):&#10;query = f'SELECT * FROM users WHERE email = {user_input}'&#10;cursor.execute(query)" 
+                                      required></textarea>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center gap-3">
+                            <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" id="loadSqlSampleBtn">
+                                <i class="bi bi-code-square me-1"></i> Load Vulnerable Sample
+                            </button>
+
+                            <button type="submit" class="btn btn-primary px-4 py-2.5 rounded-pill shadow-sm fw-semibold" id="sqlSubmitBtn">
+                                <i class="bi bi-search me-1"></i> Analyze Code Pattern
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/sql.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Phishing Scanner - Kryptic Vision Hub{% endblock %}
+
+{% block content %}
+<div class="py-5 bg-light min-vh-75 d-flex align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+                <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5 bg-white text-center">
+                    <div class="scanner-header-icon bg-primary-subtle text-primary rounded-circle mx-auto mb-3">
+                        <i class="bi bi-shield-check display-5"></i>
+                    </div>
+
+                    <h2 class="fw-bold text-secondary mb-2">Phishing URL Scanner</h2>
+                    <p class="text-muted mb-4">Paste any web address below to perform instant rule-based threat evaluation.</p>
+
+                    <!-- Scan Form -->
+                    <form id="scannerForm" action="{{ url_for('scanner.scan_url') }}" method="POST" novalidate>
+                        <div class="mb-4">
+                            <div class="input-group input-group-lg shadow-sm rounded-pill overflow-hidden border">
+                                <span class="input-group-text bg-white border-0 ps-4 text-muted">
+                                    <i class="bi bi-link-45deg fs-4"></i>
+                                </span>
+                                <input type="url" 
+                                       class="form-control border-0 ps-2 fs-6" 
+                                       id="urlInput" 
+                                       name="url" 
+                                       placeholder="https://example.com" 
+                                       required 
+                                       autocomplete="off">
+                                <button class="btn btn-primary px-4 px-md-5 fw-semibold d-flex align-items-center gap-2" 
+                                        type="submit" 
+                                        id="scanSubmitBtn">
+                                    <span class="btn-text">Analyze URL</span>
+                                    <span class="spinner-border spinner-border-sm d-none" id="scanSpinner" role="status" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                            <div class="form-text text-start ms-3 mt-2 text-muted small">
+                                <i class="bi bi-info-circle me-1"></i> Supports full URLs or plain domain names (e.g., <code>http://secure-login.xyz</code>).
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Loading Progress Overlay State -->
+                    <div id="scanLoadingState" class="d-none py-4">
+                        <div class="spinner-grow text-primary mb-3" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="visually-hidden">Analyzing...</span>
+                        </div>
+                        <h5 class="fw-bold text-secondary mb-1">Analyzing Security Indicators...</h5>
+                        <p class="text-muted small mb-0">Inspecting SSL certificate, character patterns, TLD threat scoring, and keyword matches.</p>
+                    </div>
+
+                    <!-- Security Guarantee badges -->
+                    <div class="row g-3 mt-4 pt-4 border-top text-start">
+                        <div class="col-sm-4">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="bi bi-cpu text-primary fs-4"></i>
+                                <div class="small">
+                                    <strong class="d-block text-secondary">Rule Engine</strong>
+                                    <span class="text-muted">100% Deterministic</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="bi bi-lock text-success fs-4"></i>
+                                <div class="small">
+                                    <strong class="d-block text-secondary">No AI Guesswork</strong>
+                                    <span class="text-muted">Rule-Based Checks</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="bi bi-file-earmark-lock text-info fs-4"></i>
+                                <div class="small">
+                                    <strong class="d-block text-secondary">Private & Safe</strong>
+                                    <span class="text-muted">Encrypted Logs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/scanner.js') }}"></script>
+{% endblock %}

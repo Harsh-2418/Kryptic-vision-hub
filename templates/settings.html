@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Settings - Kryptic Vision Hub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="py-5 bg-light min-vh-75">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="mb-4">
+                    <h2 class="fw-bold text-secondary mb-1">Platform Preferences & Settings</h2>
+                    <p class="text-muted small mb-0">Configure interface theme, notification channels, and security preferences.</p>
+                </div>
+
+                <form action="{{ url_for('settings.settings') }}" method="POST" id="settingsForm">
+                    <!-- Section 1: Appearance Theme Card -->
+                    <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white mb-4">
+                        <h5 class="fw-bold text-secondary mb-3">
+                            <i class="bi bi-palette text-primary me-2"></i>Appearance & Theme Engine
+                        </h5>
+                        <p class="text-muted small mb-4">Select your preferred color theme. Changes take effect immediately across all modules.</p>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="card border rounded-4 p-4 text-center theme-choice-card" onclick="applyTheme('light')">
+                                    <div class="display-6 text-warning mb-2"><i class="bi bi-sun-fill"></i></div>
+                                    <h6 class="fw-bold text-secondary mb-1">Clean Light Mode</h6>
+                                    <p class="text-muted small mb-3">High contrast light background (#F8FAFC)</p>
+                                    <div class="form-check d-inline-block">
+                                        <input class="form-check-input" type="radio" name="theme_mode" id="themeLight" value="light" {% if session.get('theme_mode') != 'dark' %}checked{% endif %}>
+                                        <label class="form-check-label small fw-semibold" for="themeLight">Active Theme</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card border rounded-4 p-4 text-center theme-choice-card" onclick="applyTheme('dark')">
+                                    <div class="display-6 text-primary mb-2"><i class="bi bi-moon-stars-fill"></i></div>
+                                    <h6 class="fw-bold text-secondary mb-1">Corporate Dark Mode</h6>
+                                    <p class="text-muted small mb-3">SaaS dark slate surfaces (#0F172A)</p>
+                                    <div class="form-check d-inline-block">
+                                        <input class="form-check-input" type="radio" name="theme_mode" id="themeDark" value="dark" {% if session.get('theme_mode') == 'dark' %}checked{% endif %}>
+                                        <label class="form-check-label small fw-semibold" for="themeDark">Active Theme</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Notifications Card -->
+                    <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white mb-4">
+                        <h5 class="fw-bold text-secondary mb-3">
+                            <i class="bi bi-bell text-warning me-2"></i>Notification Channels
+                        </h5>
+                        
+                        <div class="form-check form-switch p-3 bg-light rounded-3 border mb-3">
+                            <input class="form-check-input ms-0 me-3" type="checkbox" id="email_notifications" name="email_notifications" {% if session.get('email_notifications', True) %}checked{% endif %}>
+                            <label class="form-check-label text-secondary fw-semibold" for="email_notifications">
+                                Enable In-App Security Toast Alerts
+                                <span class="d-block text-muted small font-normal">Receive immediate visual feedback upon scan completion or error logs.</span>
+                            </label>
+                        </div>
+
+                        <div class="form-check form-switch p-3 bg-light rounded-3 border opacity-75">
+                            <input class="form-check-input ms-0 me-3" type="checkbox" id="email_alerts_placeholder" disabled>
+                            <label class="form-check-label text-muted fw-semibold" for="email_alerts_placeholder">
+                                Security Email Alerts (Enterprise Feature)
+                                <span class="d-block text-muted small font-normal">Automated email digest for high-risk threat detections.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Dashboard Default View -->
+                    <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white mb-4">
+                        <h5 class="fw-bold text-secondary mb-3">
+                            <i class="bi bi-speedometer2 text-info me-2"></i>Dashboard Default View
+                        </h5>
+                        <div class="mb-3">
+                            <label for="default_landing" class="form-label text-secondary small fw-semibold">Default Module View</label>
+                            <select class="form-select" id="default_landing" name="default_landing">
+                                <option value="dashboard" {% if session.get('default_landing') == 'dashboard' %}selected{% endif %}>Analytics Dashboard</option>
+                                <option value="scanner" {% if session.get('default_landing') == 'scanner' %}selected{% endif %}>Phishing Scanner</option>
+                                <option value="sql" {% if session.get('default_landing') == 'sql' %}selected{% endif %}>SQL Analyzer</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Section 4: Security Preferences -->
+                    <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white mb-4">
+                        <h5 class="fw-bold text-secondary mb-3">
+                            <i class="bi bi-shield-lock text-danger me-2"></i>Security Preferences
+                        </h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary small fw-semibold">Session Inactivity Timeout</label>
+                                <select class="form-select" disabled>
+                                    <option>30 Minutes (Standard)</option>
+                                    <option>1 Hour</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary small fw-semibold">SQL Injection Sanitization Engine</label>
+                                <select class="form-select" disabled>
+                                    <option>Strict Rule Engine (Active)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary rounded-pill px-5 py-2.5 shadow-sm fw-semibold">
+                        Save Preference Settings
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+{% endblock %}

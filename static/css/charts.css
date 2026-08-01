@@ -1,0 +1,6 @@
+/* Chart.js Container Styling */
+.chart-container {
+    position: relative;
+    height: 260px;
+    width: 100%;
+}

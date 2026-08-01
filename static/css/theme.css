@@ -1,0 +1,194 @@
+/* Kryptic Vision Hub - Modern SaaS Design System & Theme Tokens */
+
+:root, [data-bs-theme="light"] {
+    --bg-color: #F8FAFC;
+    --surface-color: #FFFFFF;
+    --card-color: #FFFFFF;
+    --nav-bg: rgba(255, 255, 255, 0.85);
+    --text-primary: #0F172A;
+    --text-secondary: #64748B;
+    --primary: #2563EB;
+    --primary-hover: #1D4ED8;
+    --primary-subtle: #DBEAFE;
+    --secondary: #1E293B;
+    --success: #16A34A;
+    --success-subtle: #DCFCE7;
+    --warning: #F59E0B;
+    --warning-subtle: #FEF3C7;
+    --danger: #DC2626;
+    --danger-subtle: #FEE2E2;
+    --border-color: #E2E8F0;
+    --hover-bg: #F1F5F9;
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+}
+
+[data-bs-theme="dark"] {
+    --bg-color: #0F172A;
+    --surface-color: #1E293B;
+    --card-color: #1E293B;
+    --nav-bg: rgba(17, 24, 39, 0.85);
+    --text-primary: #F8FAFC;
+    --text-secondary: #CBD5E1;
+    --primary: #3B82F6;
+    --primary-hover: #60A5FA;
+    --primary-subtle: #1E3A8A;
+    --secondary: #334155;
+    --success: #22C55E;
+    --success-subtle: #14532D;
+    --warning: #F59E0B;
+    --warning-subtle: #78350F;
+    --danger: #EF4444;
+    --danger-subtle: #7F1D1D;
+    --border-color: #334155;
+    --hover-bg: #273449;
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* Base Body Styles */
+body {
+    background-color: var(--bg-color) !important;
+    color: var(--text-primary) !important;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--nav-bg) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+.navbar .nav-link {
+    color: var(--text-secondary) !important;
+    font-weight: 500;
+}
+
+.navbar .nav-link:hover, .navbar .nav-link.active {
+    color: var(--primary) !important;
+}
+
+/* Cards & Surfaces */
+.card, .bg-white {
+    background-color: var(--card-color) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.bg-light {
+    background-color: var(--bg-color) !important;
+}
+
+.border, .border-bottom, .border-top, .border-start, .border-end {
+    border-color: var(--border-color) !important;
+}
+
+.text-secondary {
+    color: var(--text-primary) !important;
+}
+
+.text-muted {
+    color: var(--text-secondary) !important;
+}
+
+/* Tables */
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--text-primary);
+    border-color: var(--border-color) !important;
+}
+
+.table th {
+    color: var(--text-secondary) !important;
+}
+
+.table-light, .table-light th {
+    background-color: var(--hover-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--hover-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Form Controls & Inputs */
+.form-control, .form-select {
+    background-color: var(--surface-color) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: var(--surface-color) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25) !important;
+}
+
+.input-group-text {
+    background-color: var(--hover-bg) !important;
+    color: var(--text-secondary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Dropdowns */
+.dropdown-menu {
+    background-color: var(--card-color) !important;
+    border-color: var(--border-color) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+.dropdown-item {
+    color: var(--text-primary) !important;
+}
+
+.dropdown-item:hover {
+    background-color: var(--hover-bg) !important;
+    color: var(--primary) !important;
+}
+
+/* Alerts & Badges */
+.alert-info {
+    background-color: var(--primary-subtle) !important;
+    color: var(--primary) !important;
+}
+
+.badge.bg-primary-subtle {
+    background-color: var(--primary-subtle) !important;
+    color: var(--primary) !important;
+}
+
+.badge.bg-success-subtle {
+    background-color: var(--success-subtle) !important;
+    color: var(--success) !important;
+}
+
+.badge.bg-warning-subtle {
+    background-color: var(--warning-subtle) !important;
+    color: var(--warning) !important;
+}
+
+.badge.bg-danger-subtle {
+    background-color: var(--danger-subtle) !important;
+    color: var(--danger) !important;
+}
+
+/* Code & Pre Blocks */
+pre, code {
+    background-color: var(--hover-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Footers */
+.footer {
+    background-color: var(--surface-color) !important;
+    border-top: 1px solid var(--border-color) !important;
+}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Security Team - Kryptic Vision Hub{% endblock %}
+
+{% block content %}
+<div class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+                <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white">
+                    <div class="card-header bg-secondary text-white text-center py-4 border-0">
+                        <div class="contact-icon bg-white text-secondary rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                            <i class="bi bi-envelope-check-fill fs-3"></i>
+                        </div>
+                        <h4 class="fw-bold mb-0">Contact Security Operations</h4>
+                        <p class="small text-white-50 mb-0">Submit feedback, report suspicious URLs, or request university project information</p>
+                    </div>
+
+                    <div class="card-body p-4 p-md-5">
+                        <form action="{{ url_for('contact.contact') }}" method="POST" id="contactForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label text-secondary fw-semibold">Your Full Name</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-person"></i></span>
+                                    <input type="text" class="form-control border-start-0 ps-0" id="name" name="name" value="{{ name or '' }}" placeholder="John Doe" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label text-secondary fw-semibold">Email Address</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-envelope"></i></span>
+                                    <input type="email" class="form-control border-start-0 ps-0" id="email" name="email" value="{{ email or '' }}" placeholder="name@example.com" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="message" class="form-label text-secondary fw-semibold">Message / Security Report</label>
+                                <textarea class="form-control rounded-3" id="message" name="message" rows="5" placeholder="Enter your detailed inquiry or security report here..." required>{{ message or '' }}</textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-secondary w-100 py-2.5 rounded-pill shadow-sm fw-semibold">
+                                <i class="bi bi-send me-1"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

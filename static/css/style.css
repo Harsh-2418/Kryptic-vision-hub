@@ -1,0 +1,97 @@
+/* Kryptic Vision Hub - Core Design System & Global Styles */
+@import url('theme.css');
+
+.main-content {
+    flex: 1 0 auto;
+}
+
+/* Custom Typography & Utility Classes */
+.tracking-tight {
+    letter-spacing: -0.025em;
+}
+
+.max-w-2xl {
+    max-width: 42rem;
+}
+
+.max-w-md {
+    max-width: 28rem;
+}
+
+.min-vh-75 {
+    min-height: 75vh;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: #ffffff !important;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--primary-hover) !important;
+    border-color: var(--primary-hover) !important;
+}
+
+.btn-secondary {
+    background-color: var(--secondary) !important;
+    border-color: var(--secondary) !important;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--surface-color) 0%, var(--hover-bg) 100%) !important;
+}
+
+.hero-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg) !important;
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Scanner Icon */
+.scanner-header-icon {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-icon-wrapper {
+    width: 100px;
+    height: 100px;
+}
+
+/* Scroll To Top */
+#scrollToTopBtn {
+    z-index: 1050;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}

@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}{{ module_title }} Result - Kryptic Vision Hub{% endblock %}
+
+{% block content %}
+<div class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white mb-4">
+                    <!-- Result Banner Header -->
+                    <div class="card-header text-white p-4 p-md-5 text-center position-relative
+                        {% if analysis.status_class == 'danger' or analysis.severity in ['High', 'Critical'] %}
+                            bg-danger
+                        {% elif analysis.status_class == 'warning' or analysis.severity == 'Medium' %}
+                            bg-warning text-dark
+                        {% else %}
+                            bg-success
+                        {% endif %}">
+                        
+                        <span class="badge bg-white text-dark text-uppercase tracking-wider fw-bold px-3 py-1.5 rounded-pill mb-2">
+                            {{ analysis.status or analysis.severity }} Risk
+                        </span>
+                        
+                        <h1 class="display-3 fw-bold mb-1">{{ analysis.risk_score }}%</h1>
+                        <p class="mb-0 fw-semibold opacity-75">{{ module_title }} Threat Metric</p>
+                    </div>
+
+                    <div class="card-body p-4 p-md-5">
+                        <!-- Analyzed Snippet / Input Details -->
+                        {% if analysis.code_snippet %}
+                        <div class="mb-4">
+                            <span class="small text-muted d-block text-uppercase fw-bold mb-2">Analyzed Code Input</span>
+                            <pre class="bg-light p-3 rounded-3 border text-secondary font-monospace overflow-x-auto fs-6"><code>{{ analysis.code_snippet }}</code></pre>
+                        </div>
+                        {% endif %}
+
+                        {% if analysis.ssid %}
+                        <div class="bg-light p-3 rounded-3 border mb-4 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                            <div>
+                                <span class="small text-muted d-block text-uppercase fw-bold">Analyzed Target SSID</span>
+                                <strong class="fs-5 text-secondary">{{ analysis.ssid }}</strong>
+                                {% if analysis.bssid %}
+                                    <span class="small text-muted font-monospace ms-2">({{ analysis.bssid }})</span>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <span class="badge bg-secondary rounded-pill px-3 py-1.5">{{ analysis.encryption or 'Encryption Analyzed' }}</span>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Security Recommendation Alert -->
+                        <div class="alert alert-{{ analysis.status_class or 'info' }} border-0 rounded-4 p-4 mb-4">
+                            <h5 class="fw-bold d-flex align-items-center gap-2 mb-2">
+                                <i class="bi bi-lightbulb-fill"></i> Educational Security Recommendation
+                            </h5>
+                            <p class="mb-0 fs-6">{{ analysis.recommendation }}</p>
+                        </div>
+
+                        <!-- Detected Issues / Triggered Rules -->
+                        <div class="mb-4">
+                            <h5 class="fw-bold text-secondary mb-3">
+                                <i class="bi bi-shield-exclamation me-2 text-primary"></i>Evaluated Indicators & Findings
+                            </h5>
+
+                            {% if analysis.issues %}
+                                <div class="list-group list-group-flush border rounded-3 overflow-hidden">
+                                    {% for issue in analysis.issues %}
+                                    <div class="list-group-item p-3">
+                                        <div class="d-flex justify-content-between align-items-start gap-2 mb-1">
+                                            <strong class="text-secondary">{{ issue.issue }}</strong>
+                                            <span class="badge {% if issue.severity in ['High', 'Critical'] %}bg-danger{% else %}bg-warning text-dark{% endif %} rounded-pill">
+                                                {{ issue.severity }}
+                                            </span>
+                                        </div>
+                                        <p class="small text-muted mb-0">{{ issue.description }}</p>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% elif analysis.triggered_rules %}
+                                <div class="list-group list-group-flush border rounded-3 overflow-hidden">
+                                    {% for item in analysis.triggered_rules %}
+                                    <div class="list-group-item p-3 d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong class="text-secondary d-block">{{ item.rule }}</strong>
+                                            <span class="small text-muted">{{ item.detail }}</span>
+                                        </div>
+                                        <span class="badge bg-danger rounded-pill">+{{ item.score }} Points</span>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <div class="alert alert-success border-0 rounded-3 mb-0">
+                                    <i class="bi bi-check-circle-fill me-2"></i> No security anomalies or risk factors were identified.
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Safe Code Example Demonstration (if code analysis) -->
+                        {% if analysis.safe_example %}
+                        <div class="mb-4">
+                            <h5 class="fw-bold text-secondary mb-2">
+                                <i class="bi bi-check2-circle me-2 text-success"></i>Secure Coding Pattern Benchmark
+                            </h5>
+                            <pre class="bg-dark text-light p-3.5 rounded-3 font-monospace overflow-x-auto fs-6"><code>{{ analysis.safe_example }}</code></pre>
+                        </div>
+                        {% endif %}
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex flex-wrap gap-3 justify-content-between align-items-center pt-3 border-top">
+                            <a href="{{ url_for('dashboard.dashboard') }}" class="btn btn-outline-secondary rounded-pill px-4">
+                                <i class="bi bi-arrow-left me-1"></i> Back to Dashboard
+                            </a>
+                            
+                            {% if export_endpoint and analysis_id %}
+                            <a href="{{ url_for(export_endpoint, analysis_id=analysis_id) }}" class="btn btn-primary rounded-pill px-4 shadow-sm">
+                                <i class="bi bi-download me-1"></i> Export JSON Report
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

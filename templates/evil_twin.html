@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Evil Twin Simulator - Kryptic Vision Hub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/wifi.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="py-5 bg-light min-vh-75">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- Educational Simulation Disclaimer -->
+                <div class="alert alert-info border-0 shadow-sm rounded-4 p-3 mb-4 d-flex align-items-center gap-3">
+                    <i class="bi bi-broadcast fs-2 text-info flex-shrink-0"></i>
+                    <div>
+                        <strong class="d-block text-secondary">Evil Twin Detection Simulator</strong>
+                        <span class="small text-muted">Simulates BSSID (MAC Address) and access point parameter comparisons to identify rogue wireless access points mimicking legitimate SSIDs.</span>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5 bg-white">
+                    <div class="text-center mb-4">
+                        <div class="module-icon-circle bg-danger-subtle text-danger mx-auto mb-3">
+                            <i class="bi bi-router fs-2"></i>
+                        </div>
+                        <h2 class="fw-bold text-secondary mb-2">Evil Twin Detection Simulator</h2>
+                        <p class="text-muted small">Compare an active access point's BSSID and radio parameters against an authenticated trusted profile.</p>
+                    </div>
+
+                    <form id="evilTwinForm" action="{{ url_for('evil_twin.analyze_evil_twin') }}" method="POST">
+                        <div class="row g-4 mb-4">
+                            <!-- Active Access Point Column -->
+                            <div class="col-md-6">
+                                <div class="bg-light p-3.5 rounded-4 border">
+                                    <h6 class="fw-bold text-danger mb-3 d-flex align-items-center gap-2">
+                                        <i class="bi bi-wifi-off"></i> Active / Detected Access Point
+                                    </h6>
+                                    <div class="mb-3">
+                                        <label for="current_ssid" class="form-label text-secondary small fw-semibold">Current SSID</label>
+                                        <input type="text" class="form-control" id="current_ssid" name="current_ssid" placeholder="e.g. Corp_Secure_WiFi" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="current_bssid" class="form-label text-secondary small fw-semibold">Current BSSID (MAC Address)</label>
+                                        <input type="text" class="form-control font-monospace" id="current_bssid" name="current_bssid" placeholder="00:11:22:33:44:55" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="current_encryption" class="form-label text-secondary small fw-semibold">Encryption Standard</label>
+                                        <select class="form-select" id="current_encryption" name="current_encryption">
+                                            <option value="OPEN">Open (No Security)</option>
+                                            <option value="WEP">WEP</option>
+                                            <option value="WPA2">WPA2-Personal</option>
+                                            <option value="WPA3">WPA3</option>
+                                        </select>
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <label for="current_channel" class="form-label text-secondary small fw-semibold">Channel</label>
+                                            <input type="number" class="form-control" id="current_channel" name="current_channel" placeholder="6">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="current_frequency" class="form-label text-secondary small fw-semibold">Frequency Band</label>
+                                            <input type="text" class="form-control" id="current_frequency" name="current_frequency" placeholder="2.4 GHz">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Trusted Access Point Column -->
+                            <div class="col-md-6">
+                                <div class="bg-light p-3.5 rounded-4 border">
+                                    <h6 class="fw-bold text-success mb-3 d-flex align-items-center gap-2">
+                                        <i class="bi bi-shield-check"></i> Known Trusted Profile Baseline
+                                    </h6>
+                                    <div class="mb-3">
+                                        <label for="trusted_ssid" class="form-label text-secondary small fw-semibold">Trusted SSID</label>
+                                        <input type="text" class="form-control" id="trusted_ssid" name="trusted_ssid" placeholder="Corp_Secure_WiFi" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="trusted_bssid" class="form-label text-secondary small fw-semibold">Trusted BSSID (MAC Address)</label>
+                                        <input type="text" class="form-control font-monospace" id="trusted_bssid" name="trusted_bssid" placeholder="AA:BB:CC:DD:EE:FF" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="trusted_encryption" class="form-label text-secondary small fw-semibold">Trusted Encryption</label>
+                                        <select class="form-select" id="trusted_encryption" name="trusted_encryption">
+                                            <option value="WPA2">WPA2-Personal</option>
+                                            <option value="WPA3">WPA3</option>
+                                            <option value="WEP">WEP</option>
+                                        </select>
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <label for="trusted_channel" class="form-label text-secondary small fw-semibold">Trusted Channel</label>
+                                            <input type="number" class="form-control" id="trusted_channel" name="trusted_channel" placeholder="1">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="trusted_frequency" class="form-label text-secondary small fw-semibold">Trusted Frequency</label>
+                                            <input type="text" class="form-control" id="trusted_frequency" name="trusted_frequency" placeholder="5 GHz">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-danger w-100 py-2.5 rounded-pill shadow-sm fw-semibold" id="evilTwinSubmitBtn">
+                            <i class="bi bi-radar me-1"></i> Run Evil Twin Attack Simulation
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/evil_twin.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}WiFi Security Analyzer - Kryptic Vision Hub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/wifi.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="py-5 bg-light min-vh-75">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <!-- Educational Simulation Disclaimer -->
+                <div class="alert alert-info border-0 shadow-sm rounded-4 p-3 mb-4 d-flex align-items-center gap-3">
+                    <i class="bi bi-info-circle fs-2 text-info flex-shrink-0"></i>
+                    <div>
+                        <strong class="d-block text-secondary">Educational Simulation Module</strong>
+                        <span class="small text-muted">This analyzer uses deterministic security rules to score wireless network attributes against security standards. No physical packet capture or hardware access is required.</span>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5 bg-white">
+                    <div class="text-center mb-4">
+                        <div class="module-icon-circle bg-primary-subtle text-primary mx-auto mb-3">
+                            <i class="bi bi-wifi fs-2"></i>
+                        </div>
+                        <h2 class="fw-bold text-secondary mb-2">Fake WiFi Security Analyzer</h2>
+                        <p class="text-muted small">Input access point parameters to evaluate encryption level, signal integrity, and baseline risk.</p>
+                    </div>
+
+                    <form id="wifiForm" action="{{ url_for('wifi.analyze_wifi') }}" method="POST">
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label for="ssid" class="form-label text-secondary fw-semibold">Target Network SSID</label>
+                                <input type="text" class="form-control" id="ssid" name="ssid" placeholder="e.g. University_Guest_WiFi" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="encryption" class="form-label text-secondary fw-semibold">Encryption Type</label>
+                                <select class="form-select" id="encryption" name="encryption">
+                                    <option value="WPA3">WPA3 (Modern / Secure)</option>
+                                    <option value="WPA2">WPA2-Personal (Standard)</option>
+                                    <option value="WEP">WEP (Legacy / Weak)</option>
+                                    <option value="OPEN">Open (Unencrypted)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="signal_strength" class="form-label text-secondary fw-semibold">Signal Strength (dBm)</label>
+                                <input type="number" class="form-control" id="signal_strength" name="signal_strength" placeholder="-65">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="channel" class="form-label text-secondary fw-semibold">Broadcast Channel</label>
+                                <input type="number" class="form-control" id="channel" name="channel" placeholder="6">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="frequency" class="form-label text-secondary fw-semibold">Frequency (GHz)</label>
+                                <input type="text" class="form-control" id="frequency" name="frequency" placeholder="2.4 GHz / 5 GHz">
+                            </div>
+
+                            <hr class="my-4">
+
+                            <h6 class="fw-bold text-secondary mb-2"><i class="bi bi-shield-check me-2 text-primary"></i>Known Trusted Profile (Optional Baseline)</h6>
+                            <div class="col-md-4">
+                                <label for="trusted_ssid" class="form-label text-muted small">Trusted SSID</label>
+                                <input type="text" class="form-control" id="trusted_ssid" name="trusted_ssid" placeholder="University_Guest_WiFi">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="trusted_encryption" class="form-label text-muted small">Trusted Encryption</label>
+                                <select class="form-select" id="trusted_encryption" name="trusted_encryption">
+                                    <option value="">-- None --</option>
+                                    <option value="WPA3">WPA3</option>
+                                    <option value="WPA2">WPA2</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="trusted_channel" class="form-label text-muted small">Trusted Channel</label>
+                                <input type="number" class="form-control" id="trusted_channel" name="trusted_channel" placeholder="11">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2.5 rounded-pill shadow-sm fw-semibold" id="wifiSubmitBtn">
+                            <i class="bi bi-shield-play me-1"></i> Analyze WiFi Risk Score
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/wifi.js') }}"></script>
+{% endblock %}

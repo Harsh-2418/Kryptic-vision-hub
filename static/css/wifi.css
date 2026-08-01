@@ -1,0 +1,14 @@
+/* Wireless Security Simulation CSS */
+
+.module-icon-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.p-3-5 {
+    padding: 1.25rem;
+}

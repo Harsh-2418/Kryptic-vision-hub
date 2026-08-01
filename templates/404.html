@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found (404) - Kryptic Vision Hub{% endblock %}
+
+{% block content %}
+<div class="py-5 bg-light min-vh-75 d-flex align-items-center">
+    <div class="container text-center">
+        <div class="display-1 fw-bold text-primary mb-2">404</div>
+        <h2 class="fw-bold text-secondary mb-3">Page Not Found</h2>
+        <p class="text-muted max-w-md mx-auto mb-4">
+            The security page or scan result you requested could not be located. It may have been deleted or moved.
+        </p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary rounded-pill px-4 shadow-sm">
+            <i class="bi bi-house me-1"></i> Back to Home
+        </a>
+    </div>
+</div>
+{% endblock %}
