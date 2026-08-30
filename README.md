@@ -156,3 +156,45 @@ KrypticVisionHub/
 └── reports/                    # Exported JSON and PDF reports
     └── pdf/                    # Generated ReportLab PDF files
 ```
+```mermaid
+erDiagram
+    USERS ||--o{ SCAN_REPORTS : generates
+    USERS ||--o{ SYSTEM_LOGS : records
+    USERS ||--o{ USER_SETTINGS : configures
+
+    USERS {
+        int id PK
+        string username
+        string email
+        string password_hash
+        string role
+        datetime created_at
+    }
+
+    SCAN_REPORTS {
+        int id PK
+        int user_id FK
+        string target_url
+        string scan_type
+        string status
+        json results
+        datetime scanned_at
+    }
+
+    SYSTEM_LOGS {
+        int log_id PK
+        int user_id FK
+        string action
+        string ip_address
+        datetime timestamp
+    }
+
+    USER_SETTINGS {
+        int setting_id PK
+        int user_id FK
+        string theme_preference
+        boolean notifications_enabled
+        datetime updated_at
+    }
+```
+
