@@ -187,7 +187,26 @@ graph TD
 
     %% Structural Connections for Relationships
     User === Initiates
-    Initiates === Scans
+    Initiates ===
+graph LR
+    %% Center Hub
+    User[Users Entity] style User fill:#E74C3C,stroke:#333,stroke-width:3px,color:#fff;
+
+    %% Surrounding Branching Actions
+    User -->|Initiates| Scans(Scans Engine)
+    User -->|Submits| SQL[SQL Analysis]
+    User -->|Submits| XSS[XSS Analysis]
+    User -->|Performs| WiFi[WiFi Analysis]
+    User -->|Performs| Twin[Evil Twin Analysis]
+    User -->|Generates| Logs[System Logs]
+
+    style Scans fill:#FFF,stroke:#E74C3C,stroke-width:2px;
+    style SQL fill:#FFF,stroke:#E74C3C,stroke-width:2px;
+    style XSS fill:#FFF,stroke:#E74C3C,stroke-width:2px;
+    style WiFi fill:#FFF,stroke:#E74C3C,stroke-width:2px;
+    style Twin fill:#FFF,stroke:#E74C3C,stroke-width:2px;
+    style Logs fill:#FFF,stroke:#E74C3C,stroke-width:2px;
+
 
 ```
 
