@@ -203,3 +203,5 @@ sequenceDiagram
     UI-->>User: Display interactive reports dashboard with risk metrics
     deactivate UI
 ```
+## USE CASE DIAGRAM 
+<img width="475" height="457" alt="USE CASE FINAL" src="https://github.com/user-attachments/assets/6c0fa190-f721-48a9-b803-4023006e303d" />
