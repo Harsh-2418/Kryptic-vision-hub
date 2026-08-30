@@ -157,42 +157,11 @@ KrypticVisionHub/
     └── pdf/                    # Generated ReportLab PDF files
 ```
 ```mermaid
-graph TD
-    %% Entities (Rectangles)
-    User[Users Entity] style User fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff;
-    Scans[Scans Entity] style Scans fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff;
-
-    %% Relationships (Diamonds)
-    Initiates{Initiates} style Initiates fill:#F5A623,stroke:#333,stroke-width:2px;
-
-    %% Attributes for User (Ovals/Circular Content branching out)
-    id((id PK)) style id fill:#E6F7FF,stroke:#1890FF;
-    name((name)) style name fill:#FFF,stroke:#333;
-    email((email Unique)) style email fill:#FFF,stroke:#333;
-    pw_hash((password_hash)) style pw_hash fill:#FFF,stroke:#333;
-    pic((profile_pic)) style pic fill:#FFF,stroke:#333;
-    login((last_login)) style login fill:#FFF,stroke:#333;
-    admin((is_admin)) style admin fill:#FFF,stroke:#333;
-    created((created_at)) style created fill:#FFF,stroke:#333;
-
-    %% Structural Connections for Attributes
-    User --- id
-    User --- name
-    User --- email
-    User --- pw_hash
-    User --- pic
-    User --- login
-    User --- admin
-    User --- created
-
-    %% Structural Connections for Relationships
-    User === Initiates
-    Initiates ===
 graph LR
-    %% Center Hub
-    User[Users Entity] style User fill:#E74C3C,stroke:#333,stroke-width:3px,color:#fff;
+    %% Central Hub
+    User[Users Entity]
 
-    %% Surrounding Branching Actions
+    %% Action Branches
     User -->|Initiates| Scans(Scans Engine)
     User -->|Submits| SQL[SQL Analysis]
     User -->|Submits| XSS[XSS Analysis]
@@ -200,13 +169,13 @@ graph LR
     User -->|Performs| Twin[Evil Twin Analysis]
     User -->|Generates| Logs[System Logs]
 
+    %% Separation of Styles
+    style User fill:#E74C3C,stroke:#333,stroke-width:3px,color:#fff;
     style Scans fill:#FFF,stroke:#E74C3C,stroke-width:2px;
     style SQL fill:#FFF,stroke:#E74C3C,stroke-width:2px;
     style XSS fill:#FFF,stroke:#E74C3C,stroke-width:2px;
     style WiFi fill:#FFF,stroke:#E74C3C,stroke-width:2px;
     style Twin fill:#FFF,stroke:#E74C3C,stroke-width:2px;
     style Logs fill:#FFF,stroke:#E74C3C,stroke-width:2px;
-
-
 ```
 
