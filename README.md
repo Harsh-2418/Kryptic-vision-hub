@@ -157,98 +157,37 @@ KrypticVisionHub/
     └── pdf/                    # Generated ReportLab PDF files
 ```
 ```mermaid
-erDiagram
-    USERS {
-        INTEGER id PK "AUTOINCREMENT"
-        TEXT name
-        TEXT email "UNIQUE"
-        TEXT password_hash
-        TEXT profile_pic
-        TIMESTAMP last_login
-        INTEGER is_admin
-        TIMESTAMP created_at
-    }
+graph TD
+    %% Entities (Rectangles)
+    User[Users Entity] style User fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff;
+    Scans[Scans Entity] style Scans fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff;
 
-    SCANS {
-        INTEGER id PK "AUTOINCREMENT"
-        INTEGER user_id FK
-        TEXT url
-        INTEGER risk_score
-        TEXT status
-        TEXT reasons_json
-        TEXT recommendation
-        TIMESTAMP created_at
-    }
+    %% Relationships (Diamonds)
+    Initiates{Initiates} style Initiates fill:#F5A623,stroke:#333,stroke-width:2px;
 
-    CONTACT_MESSAGES {
-        INTEGER id PK "AUTOINCREMENT"
-        TEXT name
-        TEXT email
-        TEXT message
-        TIMESTAMP created_at
-    }
+    %% Attributes for User (Ovals/Circular Content branching out)
+    id((id PK)) style id fill:#E6F7FF,stroke:#1890FF;
+    name((name)) style name fill:#FFF,stroke:#333;
+    email((email Unique)) style email fill:#FFF,stroke:#333;
+    pw_hash((password_hash)) style pw_hash fill:#FFF,stroke:#333;
+    pic((profile_pic)) style pic fill:#FFF,stroke:#333;
+    login((last_login)) style login fill:#FFF,stroke:#333;
+    admin((is_admin)) style admin fill:#FFF,stroke:#333;
+    created((created_at)) style created fill:#FFF,stroke:#333;
 
-    SQL_ANALYSIS {
-        INTEGER id PK "AUTOINCREMENT"
-        INTEGER user_id FK
-        TEXT code_snippet
-        TEXT severity
-        INTEGER risk_score
-        TEXT issues_json
-        TEXT recommendation
-        TIMESTAMP created_at
-    }
+    %% Structural Connections for Attributes
+    User --- id
+    User --- name
+    User --- email
+    User --- pw_hash
+    User --- pic
+    User --- login
+    User --- admin
+    User --- created
 
-    XSS_ANALYSIS {
-        INTEGER id PK "AUTOINCREMENT"
-        INTEGER user_id FK
-        TEXT code_snippet
-        TEXT severity
-        INTEGER risk_score
-        TEXT issues_json
-        TEXT recommendation
-        TIMESTAMP created_at
-    }
-
-    WIFI_ANALYSIS {
-        INTEGER id PK "AUTOINCREMENT"
-        INTEGER user_id FK
-        TEXT ssid
-        INTEGER risk_score
-        TEXT status
-        TEXT rules_json
-        TEXT recommendation
-        TIMESTAMP created_at
-    }
-
-    EVIL_TWIN_ANALYSIS {
-        INTEGER id PK "AUTOINCREMENT"
-        INTEGER user_id FK
-        TEXT ssid
-        TEXT bssid
-        INTEGER risk_score
-        TEXT status
-        TEXT rules_json
-        TEXT recommendation
-        TIMESTAMP created_at
-    }
-
-    SYSTEM_LOGS {
-        INTEGER id PK "AUTOINCREMENT"
-        INTEGER user_id
-        TEXT event_type
-        TEXT description
-        TEXT ip_address
-        TIMESTAMP created_at
-    }
-
-    %% Relationships
-    USERS ||--o{ SCANS : "initiates"
-    USERS ||--o{ SQL_ANALYSIS : "submits"
-    USERS ||--o{ XSS_ANALYSIS : "submits"
-    USERS ||--o{ WIFI_ANALYSIS : "performs"
-    USERS ||--o{ EVIL_TWIN_ANALYSIS : "performs"
-    USERS ||--o{ SYSTEM_LOGS : "generates"
+    %% Structural Connections for Relationships
+    User === Initiates
+    Initiates === Scans
 
 ```
 
