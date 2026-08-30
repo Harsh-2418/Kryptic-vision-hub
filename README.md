@@ -156,6 +156,7 @@ KrypticVisionHub/
 └── reports/                    # Exported JSON and PDF reports
     └── pdf/                    # Generated ReportLab PDF files
 ```
+# USER ENTITY ER 
 ```mermaid
 graph LR
     %% Central Hub
@@ -178,4 +179,40 @@ graph LR
     style Twin fill:#FFF,stroke:#E74C3C,stroke-width:2px;
     style Logs fill:#FFF,stroke:#E74C3C,stroke-width:2px;
 ```
+```mermaid
+graph TD
+    %% Central Entity (Rectangle)
+    User[Users Entity]
 
+    %% Circular/Oval Contents (Attributes branching out)
+    id((id PK))
+    name((name))
+    email((email Unique))
+    pw_hash((password_hash))
+    pic((profile_pic))
+    login((last_login))
+    admin((is_admin))
+    created((created_at))
+
+    %% Structural Attribute Connections
+    User --- id
+    User --- name
+    User --- email
+    User --- pw_hash
+    User --- pic
+    User --- login
+    User --- admin
+    User --- created
+
+    %% Style Classes (Separated at the bottom to fix the syntax error)
+    style User fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff;
+    style id fill:#E6F7FF,stroke:#1890FF;
+    style name fill:#FFF,stroke:#333;
+    style email fill:#FFF,stroke:#333;
+    style pw_hash fill:#FFF,stroke:#333;
+    style pic fill:#FFF,stroke:#333;
+    style login fill:#FFF,stroke:#333;
+    style admin fill:#FFF,stroke:#333;
+    style created fill:#FFF,stroke:#333;
+
+```
