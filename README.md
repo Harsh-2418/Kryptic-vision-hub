@@ -158,43 +158,97 @@ KrypticVisionHub/
 ```
 ```mermaid
 erDiagram
-    USERS ||--o{ SCAN_REPORTS : generates
-    USERS ||--o{ SYSTEM_LOGS : records
-    USERS ||--o{ USER_SETTINGS : configures
-
     USERS {
-        int id PK
-        string username
-        string email
-        string password_hash
-        string role
-        datetime created_at
+        INTEGER id PK "AUTOINCREMENT"
+        TEXT name
+        TEXT email "UNIQUE"
+        TEXT password_hash
+        TEXT profile_pic
+        TIMESTAMP last_login
+        INTEGER is_admin
+        TIMESTAMP created_at
     }
 
-    SCAN_REPORTS {
-        int id PK
-        int user_id FK
-        string target_url
-        string scan_type
-        string status
-        json results
-        datetime scanned_at
+    SCANS {
+        INTEGER id PK "AUTOINCREMENT"
+        INTEGER user_id FK
+        TEXT url
+        INTEGER risk_score
+        TEXT status
+        TEXT reasons_json
+        TEXT recommendation
+        TIMESTAMP created_at
+    }
+
+    CONTACT_MESSAGES {
+        INTEGER id PK "AUTOINCREMENT"
+        TEXT name
+        TEXT email
+        TEXT message
+        TIMESTAMP created_at
+    }
+
+    SQL_ANALYSIS {
+        INTEGER id PK "AUTOINCREMENT"
+        INTEGER user_id FK
+        TEXT code_snippet
+        TEXT severity
+        INTEGER risk_score
+        TEXT issues_json
+        TEXT recommendation
+        TIMESTAMP created_at
+    }
+
+    XSS_ANALYSIS {
+        INTEGER id PK "AUTOINCREMENT"
+        INTEGER user_id FK
+        TEXT code_snippet
+        TEXT severity
+        INTEGER risk_score
+        TEXT issues_json
+        TEXT recommendation
+        TIMESTAMP created_at
+    }
+
+    WIFI_ANALYSIS {
+        INTEGER id PK "AUTOINCREMENT"
+        INTEGER user_id FK
+        TEXT ssid
+        INTEGER risk_score
+        TEXT status
+        TEXT rules_json
+        TEXT recommendation
+        TIMESTAMP created_at
+    }
+
+    EVIL_TWIN_ANALYSIS {
+        INTEGER id PK "AUTOINCREMENT"
+        INTEGER user_id FK
+        TEXT ssid
+        TEXT bssid
+        INTEGER risk_score
+        TEXT status
+        TEXT rules_json
+        TEXT recommendation
+        TIMESTAMP created_at
     }
 
     SYSTEM_LOGS {
-        int log_id PK
-        int user_id FK
-        string action
-        string ip_address
-        datetime timestamp
+        INTEGER id PK "AUTOINCREMENT"
+        INTEGER user_id
+        TEXT event_type
+        TEXT description
+        TEXT ip_address
+        TIMESTAMP created_at
     }
 
-    USER_SETTINGS {
-        int setting_id PK
-        int user_id FK
-        string theme_preference
-        boolean notifications_enabled
-        datetime updated_at
-    }
+    %% Relationships
+    USERS ||--o{ SCANS : "initiates"
+    USERS ||--o{ SQL_ANALYSIS : "submits"
+    USERS ||--o{ XSS_ANALYSIS : "submits"
+    USERS ||--o{ WIFI_ANALYSIS : "performs"
+    USERS ||--o{ EVIL_TWIN_ANALYSIS : "performs"
+    USERS ||--o{ SYSTEM_LOGS : "generates"
+
 ```
 
