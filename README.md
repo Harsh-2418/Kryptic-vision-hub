@@ -159,3 +159,47 @@ KrypticVisionHub/
 ## ER DIAGRAM 
 <img width="873" height="476" alt="ER FINAL" src="https://github.com/user-attachments/assets/10a65763-e48c-4c51-8432-8338a52af880" />
 
+## SEQUENCE DIAGRAM 
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as User / Admin
+    participant UI as Browser (Dashboard)
+    participant Flask as Flask Server (routes/sql_routes)
+    participant Scanner as Security Scanner Engine
+    participant DB as SQLite DB (database/db.py)
+
+    %% Step 1: Initiating the action
+    User->>UI: Enter target URL / Code snippet & click "Run Scan"
+    activate UI
+    UI->>Flask: POST request containing target payload data
+    deactivate UI
+    activate Flask
+
+    %% Step 2: Authentication & Logging check
+    Flask->>DB: Check user session & log execution event
+    activate DB
+    DB-->>Flask: Confirmation / Event logged
+    deactivate DB
+
+    %% Step 3: Performing the analysis
+    Flask->>Scanner: Trigger vulnerability script (e.g., check_sql_injection)
+    activate Scanner
+    Note over Scanner: Running payload rules<br/>& evaluating responses
+    Scanner-->>Flask: Return findings (Risk Score, Issues JSON, Recommendation)
+    deactivate Scanner
+
+    %% Step 4: Saving the results
+    Flask->>DB: INSERT INTO sql_analysis (user_id, risk_score, issues_json...)
+    activate DB
+    DB-->>Flask: Return database write success (Row ID)
+    deactivate DB
+
+    %% Step 5: Returning Response to User
+    Flask->>UI: Render template with scan report context
+    deactivate Flask
+    activate UI
+    UI-->>User: Display interactive reports dashboard with risk metrics
+    deactivate UI
+```
