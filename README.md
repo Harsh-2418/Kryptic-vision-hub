@@ -156,63 +156,6 @@ KrypticVisionHub/
 └── reports/                    # Exported JSON and PDF reports
     └── pdf/                    # Generated ReportLab PDF files
 ```
-# USER ENTITY ER 
-```mermaid
-graph LR
-    %% Central Hub
-    User[Users Entity]
+## ER DIAGRAM 
+<img width="873" height="476" alt="ER FINAL" src="https://github.com/user-attachments/assets/10a65763-e48c-4c51-8432-8338a52af880" />
 
-    %% Action Branches
-    User -->|Initiates| Scans(Scans Engine)
-    User -->|Submits| SQL[SQL Analysis]
-    User -->|Submits| XSS[XSS Analysis]
-    User -->|Performs| WiFi[WiFi Analysis]
-    User -->|Performs| Twin[Evil Twin Analysis]
-    User -->|Generates| Logs[System Logs]
-
-    %% Separation of Styles
-    style User fill:#E74C3C,stroke:#333,stroke-width:3px,color:#fff;
-    style Scans fill:#FFF,stroke:#E74C3C,stroke-width:2px;
-    style SQL fill:#FFF,stroke:#E74C3C,stroke-width:2px;
-    style XSS fill:#FFF,stroke:#E74C3C,stroke-width:2px;
-    style WiFi fill:#FFF,stroke:#E74C3C,stroke-width:2px;
-    style Twin fill:#FFF,stroke:#E74C3C,stroke-width:2px;
-    style Logs fill:#FFF,stroke:#E74C3C,stroke-width:2px;
-```
-```mermaid
-graph TD
-    %% Central Entity (Rectangle)
-    User[Users Entity]
-
-    %% Circular/Oval Contents (Attributes branching out)
-    id((id PK))
-    name((name))
-    email((email Unique))
-    pw_hash((password_hash))
-    pic((profile_pic))
-    login((last_login))
-    admin((is_admin))
-    created((created_at))
-
-    %% Structural Attribute Connections
-    User --- id
-    User --- name
-    User --- email
-    User --- pw_hash
-    User --- pic
-    User --- login
-    User --- admin
-    User --- created
-
-    %% Style Classes (Separated at the bottom to fix the syntax error)
-    style User fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff;
-    style id fill:#E6F7FF,stroke:#1890FF;
-    style name fill:#FFF,stroke:#333;
-    style email fill:#FFF,stroke:#333;
-    style pw_hash fill:#FFF,stroke:#333;
-    style pic fill:#FFF,stroke:#333;
-    style login fill:#FFF,stroke:#333;
-    style admin fill:#FFF,stroke:#333;
-    style created fill:#FFF,stroke:#333;
-
-```
